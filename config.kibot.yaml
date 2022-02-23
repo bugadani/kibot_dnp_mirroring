@@ -1,0 +1,22 @@
+kibot:
+  version: 1
+
+preflight:
+  update_xml: false
+  run_drc: false
+  check_zone_fills: true
+  ignore_unconnected: false
+
+variants:
+  - name: 'default'
+    comment: 'Default configuration'
+    type: kibom
+
+outputs:
+  # Default variant
+  - name: "Schematic diagram"
+    type: pdf_sch_print
+    dir: default
+    options:
+      output: '%f%v-%i.%x'
+      variant: default

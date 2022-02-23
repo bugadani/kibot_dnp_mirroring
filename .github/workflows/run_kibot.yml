@@ -1,0 +1,29 @@
+name: Generate fabrication outputs
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+jobs:
+  run_kibot:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Generate fabrication artifacts
+      uses: INTI-CMNB/KiBot@v1_k6
+      with:
+        config: config.kibot.yaml
+        dir: output
+        schema: 'mirroring.kicad_sch'
+        board: 'mirroring.kicad_pcb'
+
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: artifacts
+        path: ./output
